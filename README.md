@@ -1,6 +1,6 @@
-#Getting and Cleaning Data
+##Getting and Cleaning Data
 
-##Course Project
+#Course Project
 
 Create an R script called run_analysis.R that does the following:
 
@@ -10,4 +10,4 @@ Create an R script called run_analysis.R that does the following:
 4.Appropriately labels the data set with descriptive activity names.
 5.Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-##See run_analysis.R script for step details 
+#See run_analysis.R script for step details 
