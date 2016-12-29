@@ -1,11 +1,10 @@
-##get data
+##1. Get & Read Data
 if(!file.exists("./data")){dir.create("./data")}
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 download.file(fileUrl,destfile="./data/Dataset.zip",method="curl")
 unzip(zipfile="./data/Dataset.zip",exdir="./data")
 path_rf <- file.path("./data" , "UCI HAR Dataset")
 files<-list.files(path_rf, recursive=TRUE)
-##to see files print files object
 ##read data from files into variables
 ##read activity files
 dataActivityTest  <- read.table(file.path(path_rf, "test" , "Y_test.txt" ),header = FALSE)
@@ -16,7 +15,7 @@ dataSubjectTest  <- read.table(file.path(path_rf, "test" , "subject_test.txt"),h
 ##read features files
 dataFeaturesTest  <- read.table(file.path(path_rf, "test" , "X_test.txt" ),header = FALSE)
 dataFeaturesTrain <- read.table(file.path(path_rf, "train", "X_train.txt"),header = FALSE)
-##merge the training and test sets to create one dataset
+##2. Merge the training and test sets to create one dataset
 ##concentrate data tables by rows
 dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
 dataActivity<- rbind(dataActivityTrain, dataActivityTest)
@@ -29,10 +28,11 @@ names(dataFeatures)<- dataFeaturesNames$V2
 ##merge columns to get dataframe
 dataCombine <- cbind(dataSubject, dataActivity)
 Data <- cbind(dataFeatures, dataCombine)
-##extract only the measurements on mean and stdv for each measurement
+##3. Extract only the measurements on mean and stdv for each measurement
 subdataFeaturesNames<-dataFeaturesNames$V2[grep("mean\\(\\)|std\\(\\)", dataFeaturesNames$V2)]
+selectedNames<-c(as.character(subdataFeaturesNames), "subject", "activity" )
 Data<-subset(Data,select=selectedNames)
-##uses descriptive activity names to name the activities in the data set
+##4. Use descriptive activity names to name the activities in the data set
 activityLabels <- read.table(file.path(path_rf, "activity_labels.txt"),header = FALSE)
 Data$activity<-factor(Data$activity)
 Data$activity<- factor(Data$activity,labels=as.character(activityLabels$V2))
@@ -43,7 +43,7 @@ names(Data)<-gsub("Acc", "Accelerometer", names(Data))
 names(Data)<-gsub("Gyro", "Gyroscope", names(Data))
 names(Data)<-gsub("Mag", "Magnitude", names(Data))
 names(Data)<-gsub("BodyBody", "Body", names(Data))
-##creates independent data set
+##5. Createsu independent data set
 Data2<-aggregate(. ~subject + activity, Data, mean)
 Data2<-Data2[order(Data2$subject,Data2$activity),]
 ##write tidy data table
