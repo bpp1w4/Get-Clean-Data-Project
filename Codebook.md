@@ -5,7 +5,9 @@
 Variables:
 
 -Subject (10,299 Observations,1 Variable)
+
 -Activity (10,299 Observations, 1 Variable)
+
 -Features (10,299 Observations, 561 Variables)
 
 Descriptions:
