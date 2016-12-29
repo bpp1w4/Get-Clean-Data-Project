@@ -17,10 +17,8 @@ Create a tidy data set from original data set (Original Data Source:http://archi
 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 
-#See run_analysis.R script for detailed steps to create tidy data set
-
 #Files in this repo
 
-1.Readme.md--current file
-2.Codebook.md--description of original data set, variables, and transformations made 
-3.run_analysis.R--actual R code
+1. Readme.md--current file
+2. Codebook.md--description of original data set, variables, and transformations made 
+3. run_analysis.R--actual R code
